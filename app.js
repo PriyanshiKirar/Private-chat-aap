@@ -23,6 +23,7 @@ passport.use(new GoogleStrategy({
     return done(null, profile);
   }));
   
+  app.set("view engine","ejs");
 app.get('/', (req, res) => {
     res.send('<h1>Home</h1><a href="/auth/google">Login with Google</a>');
   });
