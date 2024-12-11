@@ -3,9 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chat Box</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-<h1>heloww hfhg</h1>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+    <section class="flex gap-2">
+
+        <div class="chats flex flex-col gap-4">
+            <div
+              
+                class="chat flex items-center gap-4 p-4 bg-white rounded-lg shadow-md"
+            >
+                <img class="w-[5vw] h-[5vw] bg-blue-400 rounded-full" src="" alt="">
+                <h1 class="text-lg font-semibold">displayName </h1>
+            </div>
+        
+        </div>
+
+
+    <div class="w-full max-w-md bg-white shadow-md rounded-lg overflow-hidden flex flex-col h-[500px]">
+        <!-- Chat Header -->
+        <div class="bg-blue-500 text-white px-4 py-3 text-lg font-semibold">
+            Chat Room
+        </div>
+        
+        <!-- Conversation Area -->
+        <div id="conversationArea" class="flex-1 overflow-y-auto px-4 py-2 space-y-2 bg-gray-50">
+            <!-- Sample Messages -->
+            <div class="flex items-center space-x-2">
+                <div class="bg-blue-500 text-white px-4 py-2 rounded-lg max-w-xs">
+                    Hello! How can I help you?
+                </div>
+            </div>
+            <div class="flex justify-end items-center space-x-2">
+                <div class="bg-gray-200 px-4 py-2 rounded-lg max-w-xs">
+                    Hi! I need some assistance.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Input Area -->
+        <div class="bg-gray-200 p-3 flex items-center space-x-2">
+            <input id="messageInput" type="text" placeholder="Type your message..." 
+                class="flex-1 bg-white px-4 py-2 rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none" />
+            <button id="sendButton" 
+                class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 focus:ring focus:ring-blue-300">
+                Send
+            </button>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+document.querySelector("#sendButton").addEventListener("click",function(){
+    const msg=document.querySelector("#messageInput").value;
+
+    socket.emit("message",msg);
+    console.log(msg)
+})
+
+</script>
 </body>
 </html>
